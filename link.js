@@ -47,7 +47,8 @@ function sendMsg(msg) {
 }
 
 function setup() {
-    let path = 'http://localhost:3000'
+    let path = 'https://postnet-chatapp-server.herokuapp.com/'
+    // let path = 'http://localhost:3000'
     socket = io.connect(path)
     socket.on('send-msg', data => {
         logMsg(data)

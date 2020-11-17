@@ -152,8 +152,8 @@ function logoff() {
     socket.emit('log-off', data)
 
     socket.off()
-
-    logMsg(data, 'DarkMagenta')
+    
+    log.html('')
 }
 
 function setup() {

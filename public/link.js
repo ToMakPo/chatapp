@@ -33,6 +33,12 @@ function init() {
         connectToInput.val('')
     })
 
+    $('#new-channel-button').on('click', event => {
+        connectionID = Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0').toUpperCase()
+        localStorage.setItem('chatapp-connection-id', connectionID)
+        connectTo(connectToInput.val())
+    })
+
     $('#send-button').on('click', event => {
         let msg = messageInput.val()
         if (msg) sendMsg(msg)

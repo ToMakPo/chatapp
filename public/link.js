@@ -18,9 +18,13 @@ function init() {
         qs[q[0]] = q[1]
     }
 
-    if (!formatConnectionID(qs.connection))
-    if (!formatConnectionID(localStorage.getItem('chatapp-connection-id')))
-    formatConnectionID(Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0'))
+    connectionID = formatConnectionID(qs.connection)
+        || formatConnectionID(localStorage.getItem('chatapp-connection-id'))
+        || formatConnectionID(Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0'))
+
+    console.log('connecting to: ', connectionID)
+    localStorage.setItem('chatapp-connection-id', connectionID)
+    connectionDisplay.text(connectionID)
 
     username = localStorage.getItem('chatapp-username') || ''
     userID = localStorage.getItem('chatapp-user-id')
@@ -33,13 +37,13 @@ function init() {
 
     // event listeners
     $('#connect-button').on('click', event => {
-        switchConnection(connectToInput.val())
+        connectTo(connectToInput.val())
         connectToInput.val('')
     })
 
     $('#new-channel-button').on('click', event => {
         let newID = Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0')
-        switchConnection(newID)
+        connectTo(newID)
     })
 
     $('#send-button').on('click', event => {
@@ -64,17 +68,6 @@ function formatConnectionID(newID) {
 }
 
 function connectTo(newID) {
-    newID = formatConnectionID(newID)
-    if (newID) {
-        console.log('connecting to: ', newID)
-        connectionID = newID
-        localStorage.setItem('chatapp-connection-id', connectionID)
-        connectionDisplay.text(connectionID)
-        logon()
-    }
-}
-
-function switchConnection(newID) {
     newID = formatConnectionID(newID)
     if (newID && newID != connectionID) {
         logoff()

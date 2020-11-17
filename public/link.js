@@ -18,17 +18,17 @@ function init() {
         qs[q[0]] = q[1]
     }
 
-    if (!connectTo(qs.connection))
-    if (!connectTo(localStorage.getItem('chatapp-connection-id')))
-    connectTo(Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0'))
-
     username = localStorage.getItem('chatapp-username') || ''
     userID = localStorage.getItem('chatapp-user-id')
     if (!userID) {
         userID = Math.floor(Math.random() * 36**9).toString(36).padStart(9, '0').toUpperCase()
         localStorage.setItem('chatapp-user-id', userID)
     }
-    
+
+    if (!connectTo(qs.connection))
+    if (!connectTo(localStorage.getItem('chatapp-connection-id')))
+    connectTo(Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0'))
+
     setup()
 
     // event listeners

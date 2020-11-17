@@ -152,7 +152,7 @@ function logoff() {
 }
 
 function setup() {
-    let path = 'https://postnet-chatapp-server.herokuapp.com/'
+    let path = 'https://postnet-chatapp.herokuapp.com/'
     socket = io.connect(path)
     logon()
 }

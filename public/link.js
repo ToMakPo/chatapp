@@ -26,7 +26,11 @@ function init() {
     localStorage.setItem('chatapp-connection-id', connectionID)
     connectionDisplay.text(connectionID)
 
-    username = localStorage.getItem('chatapp-username') || ''
+    username = qs.username || localStorage.getItem('chatapp-username') || ''
+    if (qs.username) {
+        localStorage.setItem('chatapp-username', username)
+        senderNameInput.val(username)
+    }
     userID = localStorage.getItem('chatapp-user-id')
     if (!userID) {
         userID = Math.floor(Math.random() * 36**9).toString(36).padStart(9, '0').toUpperCase()

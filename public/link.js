@@ -11,7 +11,18 @@ var username
 var userID
 
 function init() {
-    connectionID = localStorage.getItem('chatapp-connection-id')
+    let href = window.location.href
+    let qs = {}
+    for (let q of href.slice(href.indexOf('?') + 1).split('&')) {
+        q = q.split('=')
+        qs[q[0]] = q[1]
+    }
+    if (qs.connection) {
+        connectionID = qs.connection
+        localStorage.setItem('chatapp-connection-id', connectionID)
+    } else {
+        connectionID = localStorage.getItem('chatapp-connection-id')
+    }
     if (!connectionID) {
         connectionID = Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0').toUpperCase()
         localStorage.setItem('chatapp-connection-id', connectionID)

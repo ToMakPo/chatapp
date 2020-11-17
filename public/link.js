@@ -17,17 +17,10 @@ function init() {
         q = q.split('=')
         qs[q[0]] = q[1]
     }
-    if (qs.connection) {
-        connectionID = qs.connection
-        localStorage.setItem('chatapp-connection-id', connectionID)
-    } else {
-        connectionID = localStorage.getItem('chatapp-connection-id')
-    }
-    if (!connectionID) {
-        connectionID = Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0').toUpperCase()
-        localStorage.setItem('chatapp-connection-id', connectionID)
-    }
-    connectionDisplay.text(connectionID)
+
+    if (!connectTo(qs.connection))
+    if (!connectTo(localStorage.getItem('chatapp-connection-id')))
+    connectTo(Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0'))
 
     username = localStorage.getItem('chatapp-username') || ''
     userID = localStorage.getItem('chatapp-user-id')
@@ -40,13 +33,13 @@ function init() {
 
     // event listeners
     $('#connect-button').on('click', event => {
-        connectTo(connectToInput.val())
+        switchConnection(connectToInput.val())
         connectToInput.val('')
     })
 
     $('#new-channel-button').on('click', event => {
-        let newID = Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0').toUpperCase()
-        connectTo(newID)
+        let newID = Math.floor(Math.random() * 36**6).toString(36).padStart(6, '0')
+        switchConnection(newID)
     })
 
     $('#send-button').on('click', event => {
@@ -65,11 +58,27 @@ function init() {
     })
 }
 
+function formatConnectionID(newID) {
+    newID = (newID || '').toString().toUpperCase().replace(/[^A-Z0-9]/g, '')
+    return newID.length == 6 ? newID : null
+}
+
 function connectTo(newID) {
-    newID = newID.toUpperCase()
-    if (newID != connectionID) {
-        logoff()
+    newID = formatConnectionID(newID)
+    if (newID) {
         console.log('connecting to: ', newID)
+        connectionID = newID
+        localStorage.setItem('chatapp-connection-id', connectionID)
+        connectionDisplay.text(connectionID)
+        logon()
+    }
+}
+
+function switchConnection(newID) {
+    newID = formatConnectionID(newID)
+    if (newID && newID != connectionID) {
+        logoff()
+        console.log('switch connection to: ', newID)
         connectionID = newID
         localStorage.setItem('chatapp-connection-id', connectionID)
         connectionDisplay.text(connectionID)

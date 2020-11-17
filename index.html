@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat App</title>
+    <title>My Chat</title>
+
+    <link rel="shortcut icon" href="./icon.svg" type="image/svg">
+
+    <link rel="stylesheet" href="https://tomakpo.github.io/MyAPIs/layout.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <header>
+        <label for="sender-name-input">Sender Name: </label>
+        <input type="text" name="sender-name" id="sender-name-input">
+    </header>
+    <main>
+        <div id="inputs">
+            <input type="text" id="message-input">
+            <input type="submit" id="send-button" value="Send">
+        </div>
+        <table id="log"></table>
+    </main>
+
+    <footer>
+        <span>
+            <input type="text" id="connect-to" placeholder="connect to">
+            <input type="button" id="connect-button" value="Connect">
+        </span>
+        <span id="connection-id"></span>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js" integrity="sha512-vGcPDqyonHb0c11UofnOKdSAt5zYRpKI4ow+v6hat4i96b7nHSn8PQyk0sT5L9RECyksp+SztCPP6bqeeGaRKg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="./link.js"></script>
+    <script>init()</script>
 </body>
 </html>

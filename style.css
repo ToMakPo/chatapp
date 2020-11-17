@@ -1,0 +1,64 @@
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0.5rem;
+}
+
+header {
+    margin-bottom: 0.5rem;
+}
+
+#sender-name-input {
+    padding: 0.5rem;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#inputs {
+    flex: 0 0 auto;
+    display: flex;
+}
+
+#inputs input[type='text'] {
+    flex: 1 0 auto;
+    padding: 0.5rem;
+}
+
+#inputs input[type='submit'] {
+    flex: 0 0 auto;
+    margin-left: 0.5rem;
+    padding: 0.5rem 2rem;
+}
+
+#log {
+    flex: 1 0 auto;
+    width: 100%;
+    height: 100%;
+    margin-top: 0.5rem;
+    border: 1px solid black;
+    display: block;
+    font-family: monospace;
+}
+
+#log td {
+    padding: 0 0.5rem;
+}
+#log td:not(:first-child) {
+    border-left: 1px dotted #777;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+#connection-id::before {
+    content: 'Connection ID: ';
+}

@@ -21,5 +21,8 @@ Thumbs.db
 *.log
 *.tmp
 
+# Ignore configuration files
+.hintrc
+
 # Ignore dependencies
 /node_modules
